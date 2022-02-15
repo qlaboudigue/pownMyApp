@@ -29,7 +29,7 @@ Action / Test : A user with username "<script>alert('XSS');</script>" has been c
 Counter : When displaying the username in welcome.php, "echo $_SESSION["username"];" (line 25)  must be replaced by "echo htmlspecialchars($_SESSION["username"]);"  
 - SQLI :  
 Definition : SQL injection is a code injection technique used to attack data-driven applications, in which malicious SQL statements are inserted into an entry field for execution.  
-Action / Test : The username "' OR 1 = 1 OR'&ndash;&ndash;" is given and the whole user list is returned in welcome.php screen.
+Action / Test : The username "' OR 1 = 1 OR'&ndash;&ndash;" is given and the whole user list is returned in welcome.php screen.  
 Counter :
 - CSRF :  
 Definition : CSRF is a type of malicious exploit of a website where unauthorized commands are submitted from a user that the web application trusts.  
