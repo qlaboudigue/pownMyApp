@@ -42,9 +42,9 @@ Definition : CSRF is a type of malicious exploit of a website where unauthorized
 Action / Test :  Nothing is basically implemented at first sight making the app vulnerable to CSRF attack. See counter solution.
 Counter : The solution consists in creation a one-time token, insert it into a hidden field whose value is the token. When the form is submitted, we check if the token exists and we compare its value with the stored one :  
   $_SESSION['token'] = md5(uniqid(mt_rand(), true)); // Create a token and store it as a session variable. 
-  <input type="hidden" name="token" value="<?php echo $_SESSION['token'] ?? '' ?>"> // Add this line at line 144 of login.php. 
+  <input type="hidden" name="token" value="<?php echo $_SESSION['token'] ?? '' ?>"> // Add this line at line 144 of login.php.  
   $token = filter_input(INPUT_POST, 'token', FILTER_SANITIZE_STRING);  
-  // On line 35 in login.php, before executing request, test if token has been transmitted with POST method.
+  // On line 35 in login.php, before executing request, test if token has been transmitted with POST method.  
   if (!$token || $token !== $_SESSION['token']) {. 
       // return 405 http status code.  
       header($_SERVER['SERVER_PROTOCOL'] . ' 405 Method Not Allowed');  
