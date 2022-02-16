@@ -25,7 +25,7 @@ define('DB_NAME', '????');
 - XSS :  
 Definition : XSS attacks enable attackers to inject client-side scripts into web pages viewed by other users. The following one is a stored XSS.  
 Action / Test : A user with username "<script>alert('XSS');</script>" has been created in the Database. When logged, the welcome.php page tries to display username and thus trigger <script> with the alert('XSS').  
-Counter : When displaying the username in welcome.php, "echo $_SESSION["username"];" (line 25)  must be replaced by "echo htmlspecialchars($_SESSION["username"]);"  
+Counter : When displaying the usernames in welcome.php, "echo $_value;" (in the for each loop line 29)  must be replaced by "echo htmlspecialchars($_value);"  
   
 - SQLI :  
 Definition : SQL injection is a code injection technique used to attack data-driven applications, in which malicious SQL statements are inserted into an entry field for execution.  
