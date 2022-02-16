@@ -33,16 +33,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         $password = trim($_POST["password"]);
     }
 
-    $token = filter_input(INPUT_POST, 'token');
+    // $token = filter_input(INPUT_POST, 'token');
 
-    // Check if CSRF is given
-    if (!$token || $token !== $_SESSION['token']) {
-        $login_err = "Token does not match";
-        exit;
-    } else {
-        // Go on with request
-
-    }
+    /**
+     * // Check if CSRF is given
+     * if (!$token || $token !== $_SESSION['token']) {
+     *  $login_err = "Token does not match";
+     *   exit;
+     * } else {
+     *   // Go on with request
+     * }
+     */
+    
+    
 
     $sql = "SELECT id, username FROM users WHERE username = '".$username."' AND password = '".$password."'";
     
@@ -82,7 +85,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 } else {
 
     // Create CSRF token
-    $_SESSION['token'] = md5(uniqid(mt_rand(), true));
+    // $_SESSION['token'] = md5(uniqid(mt_rand(), true));
 
 }
 
@@ -121,9 +124,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                 <input type="password" name="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>">
                 <span class="invalid-feedback"><?php echo $password_err; ?></span>
             </div>
+            <!--
             <div>
                 <input type="hidden" name="token" value="<?php echo $_SESSION['token'] ?? '' ?>">
             </div>
+            */
+             -->
+            
             <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Login">
             </div>
