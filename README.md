@@ -39,8 +39,8 @@ Counter : Line 40 in login.php, replace "$result = mysqli_query($link, $sql);" t
   
 - CSRF :  
 Definition : CSRF is a type of malicious exploit of a website where unauthorized commands are submitted from a user that the web application trusts.  
-Action / Test :  Nothing is basically implemented at first sight making the app vulnerable to CSRF attack. The counter solution has been implemented line 36 => 45, line 84 => 85 and line 129 => 131 in login.php
-Counter : The solution consists in creation a one-time token, insert it into a hidden field whose value is the token. When the form is submitted, we check if the token exists and we compare its value with the stored one.  
+Action / Test :  Nothing is basically implemented at first sight making the app vulnerable to CSRF attack. The counter solution has been implemented line 36 => 45, line 84 => 85 and line 129 => 131 in login.php. Theses lines have been commented out to answer the assignment.
+Counter : The solution consists in creating a one-time token, insert it into a hidden field whose value is the token. When the form is submitted, we check if the token exists and we compare its value with the stored one.  
   
   1) $_SESSION['token'] = md5(uniqid(mt_rand(), true)); // Create a token and store it as a session variable.  
   2) Line 129 => 131 : Since html balises does not appear in Read.me, guest is invited to go through the mentionned lines.  
@@ -54,3 +54,4 @@ Counter : The solution consists in creation a one-time token, insert it into a h
       // process the form. 
   }. 
   
+
