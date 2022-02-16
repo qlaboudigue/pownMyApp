@@ -31,11 +31,11 @@ Counter : When displaying the username in welcome.php, "echo $_SESSION["username
 Definition : SQL injection is a code injection technique used to attack data-driven applications, in which malicious SQL statements are inserted into an entry field for execution.  
 Action / Test : The username "' OR 1 = 1 OR'&ndash;&ndash;" is given and the whole user list is returned in welcome.php screen.  
 Counter : Line 40 in login.php, replace "$result = mysqli_query($link, $sql);" that executes the request by a set of functions aiming at preparing and sanitize request before executing it. After execution, we can also test if result consists in only 1 line to avoid SQL injection trying to fetch multiple entries :   
-  $stmt = mysqli_prepare($link, $sql). 
-  mysqli_stmt_bind_param($stmt, "s", $param_username); // Sanitize and escape characteres
-  $param_username = $username // Coming from $_POST;
-  mysqli_stmt_execute
-  if(mysqli_stmt_num_rows($stmt) == 1) // Check if results contains one and only one Database entry
+  $stmt = mysqli_prepare($link, $sql).   
+  mysqli_stmt_bind_param($stmt, "s", $param_username); // Sanitize and escape characteres. 
+  $param_username = $username // Coming from $_POST;  
+  mysqli_stmt_execute. 
+  if(mysqli_stmt_num_rows($stmt) == 1) // Check if results contains one and only one Database entry. 
   
 - CSRF :  
 Definition : CSRF is a type of malicious exploit of a website where unauthorized commands are submitted from a user that the web application trusts.  
@@ -45,11 +45,11 @@ Counter : The solution consists in creation a one-time token, insert it into a h
   <input type="hidden" name="token" value="<?php echo $_SESSION['token'] ?? '' ?>"> // Add this line at line 144 of login.php
   $token = filter_input(INPUT_POST, 'token', FILTER_SANITIZE_STRING);  
   // On line 35 in login.php, before executing request, test if token has been transmitted with POST method.
-  if (!$token || $token !== $_SESSION['token']) {
-      // return 405 http status code
-      header($_SERVER['SERVER_PROTOCOL'] . ' 405 Method Not Allowed');
-     exit;
-  } else {
-      // process the form
-  }
+  if (!$token || $token !== $_SESSION['token']) {. 
+      // return 405 http status code.  
+      header($_SERVER['SERVER_PROTOCOL'] . ' 405 Method Not Allowed');  
+     exit;  
+  } else {. 
+      // process the form. 
+  }. 
   
