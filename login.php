@@ -17,7 +17,7 @@ $username_err = $password_err = $login_err = "";
 
  
 // Processing form data when form is submitted
-if($_SERVER["REQUEST_METHOD"] == "POST"){
+if($_SERVER["REQUEST_METHOD"] == "POST") {
  
     // Check if username is empty
     if(empty(trim($_POST["username"]))){
@@ -33,7 +33,17 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $password = trim($_POST["password"]);
     }
 
-    // ' OR 1 = 1 OR'&ndash;&ndash;
+    $token = filter_input(INPUT_POST, 'token');
+
+    // Check if CSRF is given
+    if (!$token || $token !== $_SESSION['token']) {
+        $login_err = "Token does not match";
+        exit;
+    } else {
+        // Go on with request
+
+    }
+
     $sql = "SELECT id, username FROM users WHERE username = '".$username."' AND password = '".$password."'";
     
     $result = mysqli_query($link, $sql);
@@ -63,16 +73,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             header("location: welcome.php");
         
         } else {
-        
-                $login_err = "Identifiant ou mot de passe invalide";
-        
+            $login_err = "Identifiant ou mot de passe invalide";
         }
-
-
-
     } else {
         $login_err = "Requête non valide";
     }
+
+} else {
+
+    // Create CSRF token
+    $_SESSION['token'] = md5(uniqid(mt_rand(), true));
 
 }
 
@@ -110,6 +120,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <label>Mot de passe</label>
                 <input type="password" name="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>">
                 <span class="invalid-feedback"><?php echo $password_err; ?></span>
+            </div>
+            <div>
+                <input type="hidden" name="token" value="<?php echo $_SESSION['token'] ?? '' ?>">
             </div>
             <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Login">
