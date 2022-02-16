@@ -14,7 +14,7 @@ Data are stored in a mySql database locally, in a table with the following struc
 - id,  
 - username,  
 - password,  
-- created_at
+- created_at  
 To test the app, user needs to set-up the database connection in the config.php file and replace ???? with related value :  
 define('DB_SERVER', '????');  
 define('DB_USERNAME', '????');  
