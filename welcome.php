@@ -22,7 +22,14 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     </style>
 </head>
 <body>
-    <h1 class="my-5">Hello, <b><?php print_r ($_SESSION["usernames"]); ?></b>. Bienvenue sur notre site.</h1>
+    <h1 class="my-5">Hello, <b>
+        <?php 
+        // print_r ($_SESSION["usernames"]); 
+        foreach($_SESSION["usernames"] as $x => $value) {
+            echo $value.'<br>';
+        }
+        ?>
+        </b>. Bienvenue sur notre site.</h1>
     <p>
         <a href="logout.php" class="btn btn-danger ml-3">Se déconnecter</a>
     </p>
